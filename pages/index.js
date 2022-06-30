@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
 import users from "./../data/users";
 
 import Gallery from "./../Components/Gallery";
@@ -10,10 +12,14 @@ export default function App() {
   const [featuredUsers] = useState(users);
 
   return (
-    <Layout>
+    <Layout title='Photo Gallery' description='A Photo Gallery from Unsplash'>
       <main className='photo-gallery-main-container'>
         {featuredUsers.map((item, index) => {
-          return <Gallery key={index} {...item} />;
+          return (
+            <AnimatePresence exitBeforeEnter key={index}>
+              <Gallery {...item} />
+            </AnimatePresence>
+          );
         })}
       </main>
       <footer className='photo-gallery-footer'>

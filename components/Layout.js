@@ -46,34 +46,6 @@ export default function Layout({ title, keywords, description, children }) {
 
   return (
     <>
-      <motion.div
-        variants={opacityTransitionVariants}
-        initial='hidden'
-        animate='visible'
-        exit='exit'
-      >
-        <motion.div
-          className={styles.transition}
-          variants={transitionContainerVariants}
-        >
-          <motion.div
-            className={styles.transitionUnit}
-            variants={transitionVariants}
-          ></motion.div>
-          <motion.div
-            className={styles.transitionUnit}
-            variants={transitionVariants}
-          ></motion.div>
-          <motion.div
-            className={styles.transitionUnit}
-            variants={transitionVariants}
-          ></motion.div>
-          <motion.div
-            className={styles.transitionUnit}
-            variants={transitionVariants}
-          ></motion.div>
-        </motion.div>
-      </motion.div>
       <Head>
         <title>{title}</title>
         <meta name='description' content={description} />
@@ -101,14 +73,8 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
       </Head>
-      <motion.div
-        variants={opacity2TransitionVariants}
-        initial='hidden'
-        animate='visible'
-        exit='exit'
-      >
-        <div className={styles.mainContainer}>{children}</div>
-      </motion.div>
+
+      <div className={styles.mainContainer}>{children}</div>
     </>
   );
 }
