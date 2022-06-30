@@ -1,0 +1,27 @@
+@import "./variables";
+
+.filmsContainer {
+  max-width: 100vw;
+  margin-top: 4.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.films,
+.allFilms {
+  height: 100%;
+}
+
+.filmCategories {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: horizontal;
+  justify-content: flex-end;
+  width: 100%;
+  z-index: 9;
+}
+
+.filmInfo {
+  z-index: 20;
+}
