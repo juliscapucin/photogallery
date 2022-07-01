@@ -3,7 +3,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
-import styles from "./../styles/Layout.module.scss";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const opacityTransitionVariants = {
   hidden: { opacity: 1 },
@@ -74,14 +75,18 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name='theme-color' content='#ffffff' />
       </Head>
 
-      <div className={styles.mainContainer}>{children}</div>
+      <div className='main-container'>
+        <Header />
+        {children}
+        <Footer />
+      </div>
     </>
   );
 }
 
 Layout.defaultProps = {
-  title: "Paul de Heer | Film editor",
+  title: "Photo Gallery",
   description: "Here goes description for meta tag.",
-  keywords: "film, filmmaking, edition",
+  keywords: "photography, gallery, unsplash",
   link: "rel='icon' href='/favicon.ico'",
 };

@@ -12,17 +12,6 @@ export default function Gallery({ name, url }) {
 
   return (
     <>
-      <header>
-        <a
-          className='photo-gallery-btn'
-          href={`${!loading && url}`}
-          target='_blank'
-        >
-          <div className='photo-gallery-user-name'>
-            <h1>{name}</h1>
-          </div>
-        </a>
-      </header>
       <section className='photo-gallery-gallery'>
         <div className='photo-gallery-grid '>
           {images.map((item, index) => {

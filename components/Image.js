@@ -1,14 +1,40 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
-import { AnimatePresence } from "framer-motion";
+
+import { motion, AnimatePresence } from "framer-motion";
 
 import texts from "./../data/texts";
 
+/*
+=================== 
+Transition Variants
+===================
+*/
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 1 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 1 },
+  },
+};
+
+/*
+=================== 
+Image Component
+===================
+*/
 export default function Image({ url, description, index }) {
   const [info, setInfo] = useState({});
   const [showInfo, setShowInfo] = useState(false);
   const refParagraph = useRef(null);
   const refImageWrapper = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     texts.forEach((item) => {
@@ -22,45 +48,51 @@ export default function Image({ url, description, index }) {
     refImageWrapper.current.style.width = "90vw";
     refImageWrapper.current.style.height = "100vh";
     refImageWrapper.current.scrollIntoView();
-    refImageWrapper.current.scrollIntoView();
+
+    setTimeout(() => {
+      router.push(`/photographers/${index}`);
+    }, 1000);
   };
 
   return (
-    <AnimatePresence exitBeforeEnter key={index}>
-      <Link href={`/photographers/${index}`}>
-        <button
-          className='photo-gallery-btn'
-          onMouseEnter={() => setShowInfo(!showInfo)}
-          onMouseLeave={() => setShowInfo(!showInfo)}
-          onClick={growImage}
-        >
-          <div className='photo-gallery-img-container' ref={refImageWrapper}>
-            <div className='photo-gallery-info-container'>
-              <div
-                className='photo-gallery-info'
-                style={
-                  showInfo
-                    ? {
-                        transform: "translateY(0%)",
-                      }
-                    : {
-                        transform: "translateY(65%)",
-                      }
-                }
-              >
-                <h3>{info.title}</h3>
-                <div className='photo-gallery-paragraph' ref={refParagraph}>
-                  <p>{info.paragraph}</p>
-                  <p>{info.shortText}</p>
-                </div>
-              </div>
-            </div>
-            <div className='photo-gallery-img'>
-              <img src={url} alt={description} loading='lazy' />
+    // <motion.article
+    //   variants={containerVariants}
+    //   initial='hidden'
+    //   animate='visible'
+    //   exit='exit'
+    // >
+    <button
+      className='photo-gallery-btn'
+      onMouseEnter={() => setShowInfo(!showInfo)}
+      onMouseLeave={() => setShowInfo(!showInfo)}
+      onClick={growImage}
+    >
+      <div className='photo-gallery-img-container' ref={refImageWrapper}>
+        <div className='photo-gallery-info-container'>
+          <div
+            className='photo-gallery-info'
+            style={
+              showInfo
+                ? {
+                    transform: "translateY(0%)",
+                  }
+                : {
+                    transform: "translateY(65%)",
+                  }
+            }
+          >
+            <h3>{info.title}</h3>
+            <div className='photo-gallery-paragraph' ref={refParagraph}>
+              <p>{info.paragraph}</p>
+              <p>{info.shortText}</p>
             </div>
           </div>
-        </button>
-      </Link>
-    </AnimatePresence>
+        </div>
+        <div className='photo-gallery-img'>
+          <img src={url} alt={description} loading='lazy' />
+        </div>
+      </div>
+    </button>
+    // </motion.article>
   );
 }
