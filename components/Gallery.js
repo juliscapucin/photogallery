@@ -15,7 +15,7 @@ export default function Gallery({ name, url }) {
       <section className='photo-gallery-gallery'>
         <div className='photo-gallery-grid '>
           {images.map((item, index) => {
-            return <Image index={index + 1} key={index} {...item} />;
+            return <Image index={index} key={index} {...item} />;
           })}
         </div>
       </section>

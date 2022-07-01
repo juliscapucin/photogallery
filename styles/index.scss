@@ -152,6 +152,7 @@ Gallery
 }
 
 .photo-gallery-grid {
+  position: relative;
   width: 100%;
   display: grid;
   justify-items: flex-end;
@@ -173,7 +174,6 @@ Image
 }
 
 .photo-gallery-img-container {
-  position: relative;
   width: 70vw;
   height: 70vh;
   padding-right: 2rem;
@@ -209,24 +209,9 @@ Image
 
 /*
 =============== 
-Type styles
+Text styles
 ===============
 */
-
-.photo-gallery-user-bio {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  justify-items: flex-end;
-  z-index: 2;
-
-  h4 {
-    color: $clr-white;
-    font-weight: 100;
-    font-size: clamp(1.2rem, 2vw, 2rem);
-  }
-}
 
 .photo-gallery-info-container {
   position: absolute;
@@ -237,6 +222,7 @@ Type styles
   bottom: 2rem;
   left: 3rem;
   z-index: 10;
+  transition: 0.3s;
 
   .photo-gallery-info {
     display: flex;
@@ -313,9 +299,10 @@ Photographer
 */
 
 .photographer-container {
+  position: relative;
   background-color: $clr-black;
   width: 100vw;
-  // height: 100vh;
+  min-height: 100vh;
   // overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -323,7 +310,12 @@ Photographer
   padding: 0 2rem;
 
   .photographer-main-image-container {
-    position: relative;
+    position: fixed;
+    top: 0;
+    right: 2rem;
+    bottom: 0;
+    left: auto;
+    z-index: 200;
     width: 90vw;
     height: 100vh;
     padding-right: 2rem;
@@ -332,7 +324,6 @@ Photographer
     overflow: hidden;
     will-change: transform;
     transform-origin: center;
-    transition: 0.8s;
 
     .photographer-main-image {
       width: 100%;

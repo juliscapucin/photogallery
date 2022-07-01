@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import texts from "./../data/texts";
+import images from "../data/images";
 
 /*
 =================== 
@@ -29,16 +29,17 @@ const containerVariants = {
 Image Component
 ===================
 */
-export default function Image({ url, description, index }) {
+export default function Image({ url, description, id, index }) {
   const [info, setInfo] = useState({});
   const [showInfo, setShowInfo] = useState(false);
   const refParagraph = useRef(null);
   const refImageWrapper = useRef(null);
+  const refTextInfo = useRef(null);
   const router = useRouter();
 
   useEffect(() => {
-    texts.forEach((item) => {
-      if (item.id === index) {
+    images.forEach((item) => {
+      if (item.id === id) {
         setInfo(item);
       }
     });
@@ -47,11 +48,13 @@ export default function Image({ url, description, index }) {
   const growImage = () => {
     refImageWrapper.current.style.width = "90vw";
     refImageWrapper.current.style.height = "100vh";
+    refTextInfo.current.style.transform = "translateY(150%)";
+
     refImageWrapper.current.scrollIntoView();
 
     setTimeout(() => {
-      router.push(`/photographers/${index}`);
-    }, 1000);
+      router.push(`/photographers/${info.slug}`);
+    }, 600);
   };
 
   return (
@@ -68,7 +71,7 @@ export default function Image({ url, description, index }) {
       onClick={growImage}
     >
       <div className='photo-gallery-img-container' ref={refImageWrapper}>
-        <div className='photo-gallery-info-container'>
+        <div className='photo-gallery-info-container' ref={refTextInfo}>
           <div
             className='photo-gallery-info'
             style={
